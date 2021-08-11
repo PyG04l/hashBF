@@ -1,3 +1,4 @@
+# coding=utf-8
 import hashlib
 import sys
 import os
@@ -11,7 +12,7 @@ def selectOP(op):
 			return os.system('chdir')
 		elif op == 3:
 			return os.system('pause>nul')
-	elif operSist == 'linux':
+	elif operSist == 'linux' or operSist == 'linux2':
 		if op == 1:
 			return os.system('clear')
 		elif op == 2:
@@ -65,44 +66,44 @@ def hashBF():
 		print('6) BLAKE2B')
 		print('7) BLAKE2S')
 		print('8) MD5')
-		op = input('\nElija una opción: ')
+		op = int(input('\nElija una opción: '))
 
-		if op == '1':
+		if op == 1:
 			for x in resolvedor:
 				a = hashlib.sha1(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '2':
+		elif op == 2:
 			for x in resolvedor:
 				a = hashlib.sha224(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '3':
+		elif op == 3:
 			for x in resolvedor:
 				a = hashlib.sha256(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '4':	
+		elif op == 4:	
 			for x in resolvedor:
 				a = hashlib.sha384(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '5':
+		elif op == 5:
 			for x in resolvedor:
 				a = hashlib.sha512(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '6':	
+		elif op == 6:	
 			for x in resolvedor:
 				a = hashlib.blake2b(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '7':
+		elif op == 7:
 			for x in resolvedor:
 				a = hashlib.blake2s(x.encode()).hexdigest()
 				if a == resolverHash:
 					return "\nClave: {} Este Hash fue resuelto: {}".format(x,a)
-		elif op == '8':
+		elif op == 8:
 			for x in resolvedor:
 				a = hashlib.md5(x.encode()).hexdigest()
 				if a == resolverHash:
@@ -132,58 +133,58 @@ def traduct():
 		print('6) BLAKE2B')
 		print('7) BLAKE2S')
 		print('8) MD5')
-		op = input('\nElija una opción: ')
+		op = int(input('\nElija una opción: '))
 
-		if op == '1':
+		if op == 1:
 			for line in fRead:
 				fWrite.write(hashlib.sha1(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '2':
+		elif op == 2:
 			for line in fRead:
 				fWrite.write(hashlib.sha224(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '3':
+		elif op == 3:
 			for line in fRead:
 				fWrite.write(hashlib.sha256(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '4':
+		elif op == 4:
 			for line in fRead:
 				fWrite.write(hashlib.sha384(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '5':
+		elif op == 5:
 			for line in fRead:
 				fWrite.write(hashlib.sha512(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '6':	
+		elif op == 6:	
 			for line in fRead:
 				fWrite.write(hashlib.blake2b(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '7':
+		elif op == 7:
 			for line in fRead:
 				fWrite.write(hashlib.blake2s(line.encode()).hexdigest())
 				fWrite.write("\n")
 			fRead.close()
 			fWrite.close()
 			return '\nSe ha completado la traducción de hashes!\nArchivo guardado en: \n'
-		elif op == '8':
+		elif op == 8:
 			for line in fRead:
 				fWrite.write(hashlib.md5(line.encode()).hexdigest())
 				fWrite.write("\n")
@@ -207,10 +208,10 @@ def hashingFile():
 	print('6) BLAKE2B')
 	print('7) BLAKE2S')
 	print('8) MD5')
-	op = input('\nElija una opción: ')
+	op = int(input('\nElija una opción: '))
 	rutFile = input('Agrague la ruta del archivo del que desee calcular el Hash: ')
 
-	if op == '1':
+	if op == 1:
 		try:
 			hashsha1 = hashlib.sha1()
 			with open(rutFile, "rb") as f:
@@ -218,8 +219,8 @@ def hashingFile():
 					hashsha1.update(block)
 					return hashsha1.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '2':
+			return "Error: {}".format(e)
+	elif op == 2:
 		try:
 			hashsha224 = hashlib.sha224()
 			with open(rutFile, "rb") as f:
@@ -227,8 +228,8 @@ def hashingFile():
 					hashsha224.update(block)
 					return hashsha224.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '3':
+			return "Error: {}".format(e)
+	elif op == 3:
 		try:
 			hashsha256 = hashlib.sha256()
 			with open(rutFile, "rb") as f:
@@ -236,8 +237,8 @@ def hashingFile():
 					hashsha256.update(block)
 					return hashsha256.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '4':
+			return "Error: {}".format(e)
+	elif op == 4:
 		try:
 			hashsha384 = hashlib.sha384()
 			with open(rutFile, "rb") as f:
@@ -245,8 +246,8 @@ def hashingFile():
 					hashsha384.update(block)
 					return hashsha384.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '5':
+			return "Error: {}".format(e)
+	elif op == 5:
 		try:
 			hashsha512 = hashlib.sha512()
 			with open(rutFile, "rb") as f:
@@ -254,8 +255,8 @@ def hashingFile():
 					hashsha512.update(block)
 					return hashsha512.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '6':
+			return "Error: {}".format(e)
+	elif op == 6:
 		try:
 			hashblake2b = hashlib.blake2b()
 			with open(rutFile, "rb") as f:
@@ -263,8 +264,8 @@ def hashingFile():
 					hashblake2b.update(block)
 					return hashblake2b.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '7':
+			return "Error: {}".format(e)
+	elif op == 7:
 		try:
 			hashblake2s = hashlib.blake2s()
 			with open(rutFile, "rb") as f:
@@ -272,8 +273,8 @@ def hashingFile():
 					hashblake2s.update(block)
 					return hashblake2s.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
-	elif op == '8':
+			return "Error: {}".format(e)
+	elif op == 8:
 		try:
 			hashmd5 = hashlib.md5()
 			with open(rutFile, "rb") as f:
@@ -281,7 +282,7 @@ def hashingFile():
 					hashmd5.update(block)
 					return hashmd5.hexdigest()
 		except Exception as e:
-			return f"Error: {e}"
+			return "Error: {}".format(e)
 	else:
 		print('Por favor, elija una opción correcta')
 		selectOP(3)
@@ -293,9 +294,9 @@ def menu():
 	print('2) Hash Traductor')
 	print('3) Calcular Hash Archivo')
 	print('4) Salir\n')
-	op = input('Seleccione una opción: ')
+	op = int(input('Seleccione una opción: '))
 
-	if op == '1':
+	if op == 1:
 		try:
 			response = hashBF()
 			if response == None:
@@ -305,16 +306,16 @@ def menu():
 		except:
 			print('\nNo se ha encontrado el archivo especificado')
 		options(1)
-	elif op == '2':
+	elif op == 2:
 		res = traduct()
 		print(res)
 		if res[1] == 'S':
 			selectOP(2)
 		options(2)
-	elif op == '3':
+	elif op == 3:
 		print(hashingFile())
 		options(3)
-	elif op == '4':
+	elif op == 4:
 		selectOP(1)
 		exit()
 	else:
